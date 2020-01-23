@@ -1,0 +1,193 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
+
+body {
+    margin: 0;
+    margin-top: 50px;
+    font-family: "Exo",sans-serif;
+}
+
+header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    line-height: 50px;
+    background-color: #eee;
+}
+
+header * {
+    display: inline;
+    height: 50px;
+}
+
+header ul {
+    padding: 0;
+}
+
+header li {
+    margin-left: 20px;
+}
+
+section {
+    height: 100vh;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    background-size: cover; /* Add this line */
+    background-position: center center; /* Add this line */
+    background-repeat: no-repeat; /* Add this line */
+    background-attachment: fixed; /* Add this line */
+}
+
+#hero .profile-img {
+    width: 200px;
+    border-radius: 50%;
+}
+
+footer {
+    text-align: center;
+    padding: 50px;
+}
+
+#hero h1 {
+    font-size: 3em;
+}
+
+section h2 {
+    font-size: 2.5em;
+}
+
+section h3 {
+    font-size: 1.5em;
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Add everything below here */
+
+#hero {
+    background-image: linear-gradient(rgba(255,255,255,0.75),rgba(255,255,255,0.75)), url('https://codetheweb.blog/assets/img/posts/steps-to-creating-a-website/field.jpg');
+    /*width: 100%;*/
+    text-align: center;
+}
+
+#hero h1 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #212121;
+  letter-spacing: 3px;
+}
+#hero h1 span {
+  display: inline-block;
+}
+
+#hero h1 span:before, #hero h1 span:after {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 2px;
+  background-color: #212121;
+  margin: 0px 0px 0px 2px;
+}
+
+#hero .effect {
+  width: 100%;
+  padding: 50px 0px 70px 0px;
+}
+#hero .effect h2 {
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: 25px;
+  letter-spacing: 3px;
+}
+#hero .effect:nth-child(2) {
+  margin-top: 50px;
+}
+
+#hero .effect:nth-child(2n+1) h2 {
+  color: #212121;
+}
+#hero .effect:nth-child(2n) a {
+  color: #212121;
+  border-color: #212121;
+}
+#hero .effect .buttons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+
+#hero .effect {
+  display: flex;
+}
+#hero .effect a {
+  text-decoration: none;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 20px;
+  font-size: 25px;
+  overflow: hidden;
+  position: relative;
+  color: #212121;
+  border: 2px solid #212121;
+}
+#hero .effect a i {
+  position: relative;
+  z-index: 3;
+}
+#hero .effect a:last-child {
+  margin-right: 0px;
+}
+#hero .effect a:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+#hero .effect a i {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* amiens effect */
+#hero .effect.amiens a {
+  transition: all 0.2s linear 0.2s;
+}
+#hero .effect.amiens a i {
+  transition: all 0.2s linear 0s;
+}
+#hero .effect.amiens a:hover {
+  transition: all 0.2s linear 0s;
+  border-color: rgba(235, 228, 228, 0.75);
+}
+#hero .effect.amiens a:hover i {
+  transform: scale(1.75);
+  text-shadow: 4px 0px 3px rgba(33, 33, 33, 0.3);
+  transition: all 0.2s linear 0.2s;
+}
+
+
+
+#about {
+    background-image: linear-gradient(rgba(255,255,255,0.75),rgba(255,255,255,0.75)), url('https://codetheweb.blog/assets/img/posts/steps-to-creating-a-website/beach.jpg');
+}
+
+#contact {
+    background-image: linear-gradient(rgba(255,255,255,0.75),rgba(255,255,255,0.75)), url('https://codetheweb.blog/assets/img/posts/steps-to-creating-a-website/canyon.jpg');
+}
