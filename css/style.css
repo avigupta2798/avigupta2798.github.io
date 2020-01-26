@@ -30,7 +30,6 @@ footer {
     text-align: center;
     font-family: "Dancing Script",sans-serif;
     font-size: 15px;
-
 }
 
 section h2 {
@@ -61,28 +60,11 @@ section h3 {
   font-size: 30px;
   letter-spacing: 3px;
 }
-a,
-a:hover{
-    text-decoration: none;
-    color: #212121;
-}
 
-#hero .effect:nth-child(2n+1) h2 {
-  color: #212121;
-}
-#hero .effect:nth-child(2n) a {
-  color: #212121;
-  border-color: #212121;
-}
 #hero .effect .buttons {
   margin-top: 30px;
   display: flex;
   justify-content: center;
-}
-
-
-#hero .effect {
-  display: flex;
 }
 #hero .effect a {
   text-decoration: none;
@@ -99,23 +81,7 @@ a:hover{
   color: #212121;
   border: 2px solid #212121;
 }
-#hero .effect a i {
-  position: relative;
-  z-index: 3;
-}
-#hero .effect a:last-child {
-  margin-right: 0px;
-}
-#hero .effect a:before {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-}
-#hero .effect a i {
-  display: inline-block;
-  vertical-align: middle;
-}
+
 
 /* amiens effect */
 #hero .effect.amiens a {
@@ -126,7 +92,7 @@ a:hover{
 }
 #hero .effect.amiens a:hover {
   transition: all 0.2s linear 0s;
-  border-color: rgba(235, 228, 228, 0.75);
+  border-color: rgba(241, 234, 234, 0.75);
 }
 #hero .effect.amiens a:hover i {
   transform: scale(1.75);
@@ -136,10 +102,10 @@ a:hover{
 
 
 
-#about {
+/*#about {
     background-image: linear-gradient(rgba(255,255,255,0.75),rgba(255,255,255,0.75)), url('https://codetheweb.blog/assets/img/posts/steps-to-creating-a-website/beach.jpg');
 }
 
 #contact {
     background-image: linear-gradient(rgba(255,255,255,0.75),rgba(255,255,255,0.75)), url('https://codetheweb.blog/assets/img/posts/steps-to-creating-a-website/canyon.jpg');
-}
+}*/
