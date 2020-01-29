@@ -1,111 +1,165 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
 
+@import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css);
+/* General/reset styles */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    margin: 0;
-    font-family: sans-serif;
-    font-size: 30px;
-    color: #212121;
-}
-
-
-
-section {
-    height: 100vh;  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    
-    background-size: cover; /* Add this line */
-    background-position: center center; /* Add this line */
-    background-repeat: no-repeat; /* Add this line */
-    background-attachment: fixed; /* Add this line */
-}
-
-#hero .profile-img {
-    width: 200px;
-    border-radius: 50%;
-}
-footer {
-    text-align: center;
-    font-family: "Dancing Script",sans-serif;
-    font-size: 15px;
-}
-
-section h2 {
-    font-size: 1.5em;
-}
-
-section h3 {
-    font-size: 1.5em;
-}
-
-#hero {
-    background-image: linear-gradient(rgba(255,255,255,0.75),rgba(255,255,255,0.75)), url('https://codetheweb.blog/assets/img/posts/steps-to-creating-a-website/field.jpg');
-    /*width: 100%;*/
-    text-align: center;
-}
-#hero h1 {
-  font-family: "Caveat", sans-serif;
-  font-weight: 900;
-  font-size: 30px;
-  text-transform: none;
-  color: #212121;
-  letter-spacing: 3px;
-}
-#hero h3, #hero h4 {
-  color: #212121;
-  font-family: 'Caveat', serif;
-  font-weight: 700;
-  font-size: 30px;
-  letter-spacing: 3px;
-}
-
-#hero .effect .buttons {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-}
-#hero .effect a {
-  text-decoration: none;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  margin-right: 20px;
-  font-size: 25px;
-  overflow: hidden;
+  font-family: 'Caveat', sans-serif;
+  overflow-x: hidden;
   position: relative;
+  height: 100vh;
+  color: #fff;
+}
+
+.new-section {
+  padding-top: 50px;
+  text-align: center;
+  font-size: 4em;
+  font-weight: 100;
+}
+
+/*     styles */
+
+.front{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+}
+@media screen and (max-width: 768px) {
+  .front {
+    height: inherit !important;
+    padding-top: 7em;
+    padding-bottom: 7em;
+  }
+}
+@media screen and (max-width: 768px) {
+  .front {
+    padding: 7em 0 7em 0;
+  }
+}
+
+
+.front .front-text {
+  margin-top: 200px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+@media screen and (max-width: 768px) {
+  .front .front-text {
+    height: inherit !important;
+    margin-top: inherit !important;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+
+.front:before{
+  z-index:1;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+  content:"";
+  background: linear-gradient(to right, #DAE2F8, #D6A4A4);
+  opacity:0.6;
+}
+
+
+.front > .container-fluid {
+  position: relative;
+  z-index: 3;
+}
+
+
+.front h1 {
+  font-size: 6em;
   color: #212121;
-  border: 2px solid #212121;
+  font-weight: 450;
+  letter-spacing: 3px;
+  line-height: 1.15;
+}
+@media screen and (max-width: 768px) {
+  .front h1 {
+    font-size: 36px;
+  }
+  .front h1.animated{
+    animation-duration: 2s;
+  }
+  
+  .front h2.animated{
+    animation-duration: 4s;
+  }
 }
 
-
-/* amiens effect */
-#hero .effect.amiens a {
-  transition: all 0.2s linear 0.2s;
-}
-#hero .effect.amiens a i {
-  transition: all 0.2s linear 0s;
-}
-#hero .effect.amiens a:hover {
-  transition: all 0.2s linear 0s;
-  border-color: rgba(241, 234, 234, 0.75);
-}
-#hero .effect.amiens a:hover i {
-  transform: scale(1.75);
-  text-shadow: 4px 0px 3px rgba(33, 33, 33, 0.3);
-  transition: all 0.2s linear 0.2s;
+  .front h2 {
+  font-size: 3em;
+  color: #212121;
+  font-weight: 100;
+  letter-spacing: 3px;
+  line-height: 1.15;
 }
 
-
-
-/*#about {
-    background-image: linear-gradient(rgba(255,255,255,0.75),rgba(255,255,255,0.75)), url('https://codetheweb.blog/assets/img/posts/steps-to-creating-a-website/beach.jpg');
+.front h1.animated{
+  animation-duration: 2s;
 }
 
-#contact {
-    background-image: linear-gradient(rgba(255,255,255,0.75),rgba(255,255,255,0.75)), url('https://codetheweb.blog/assets/img/posts/steps-to-creating-a-website/canyon.jpg');
-}*/
+.front h2.animated{
+  animation-duration: 4s;
+}
+
+  .front span.animated {
+  position: absolute;
+  margin: auto;
+  right: 0;
+  left: 0;
+  bottom: 50px;
+  height: 4px;
+  width: 4px;
+  border-radius: 2px;
+  background: #fff;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+}
+
+.front   span::before,
+    span::after {
+  position: absolute;
+  top: -23px;
+  right: 20%;
+  content: "";
+  height: 30px;
+  width: 4px;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.front  span::before {
+  left: -10px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform:    rotate(-45deg);
+  -ms-transform:     rotate(-45deg);
+  -o-transform:      rotate(-45deg);
+  transform:         rotate(-45deg);
+}
+
+.front  span::after {
+  right: -10px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+  transform:         rotate(45deg);
+}
+
