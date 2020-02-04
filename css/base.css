@@ -1,11 +1,6 @@
-/** 
- * ===================================================================
- * 13. blogs - (_layout.scss)
- *
- * ------------------------------------------------------------------- 
- */
+
  #blogs {
-	background: #FFFFFF;
+	background: #ebebeb;
 	padding-top: 12rem;
 	padding-bottom: 12rem;
 }
@@ -93,11 +88,6 @@ p.lead {
 	}
 }
 
-/**
- * responsive:
- * blogs
- * ------------------------------------------------------------------- 
- */
 @media only screen and (max-width:1024px) {
 	#blogs .blog-title {
 		font-size: 3.1rem;
@@ -135,6 +125,87 @@ p.lead {
 	max-width: none;
 	margin-left: -20px;
 	margin-right: -20px;
+}
+
+[class*="col-"],
+.bgrid {
+	float: left;
+}
+
+[class*="col-"] + [class*="col-"].end {
+	float: right;
+}
+
+[class*="col-"] {
+	padding: 0 20px;
+}
+
+.col-one {
+	width: 8.33333%;
+}
+
+.col-two,
+.col-1-6 {
+	width: 16.66667%;
+}
+
+.col-three,
+.col-1-4 {
+	width: 25%;
+}
+
+.col-four,
+.col-1-3 {
+	width: 33.33333%;
+}
+
+.col-five {
+	width: 41.66667%;
+}
+
+.col-six,
+.col-1-2 {
+	width: 50%;
+}
+
+.col-seven {
+	width: 58.33333%;
+}
+
+.col-eight,
+.col-2-3 {
+	width: 66.66667%;
+}
+
+.col-nine,
+.col-3-4 {
+	width: 75%;
+}
+
+.col-ten,
+.col-5-6 {
+	width: 83.33333%;
+}
+
+.col-eleven {
+	width: 91.66667%;
+}
+
+.col-twelve,
+.col-full {
+	width: 100%;
+}
+
+@media screen and (max-width:1024px) {
+	.row .row {
+		margin-left: -18px;
+		margin-right: -18px;
+	}
+
+	[class*="col-"] {
+		padding: 0 18px;
+	}
+
 }
 
 @media screen and (max-width:768px) {
@@ -213,6 +284,7 @@ p.lead {
 	}
 
 }
+
 @media screen and (max-width:400px) {
 	.row .row {
 		padding-left: 0;
@@ -259,11 +331,6 @@ p.lead {
 	letter-spacing: .4rem;
 }
 
-/**
- * responsive:
- * common styles
- * ------------------------------------------------------------------- 
- */
 @media only screen and (max-width:768px) {
 	.section-intro {
 		max-width: 650px;
@@ -376,90 +443,7 @@ p.lead {
 	}
 }
 
-/**
- * Popup Modal - (_layout.scss)
- * ------------------------------------------------------------------
- */
- .popup-modal {
-	max-width: 550px;
-	background: #FFFFFF;
-	position: relative;
-	margin: 0 auto;
-}
-.popup-modal .media {
-	position: relative;
-}
-.popup-modal img {
-	vertical-align: bottom;
-}
-.popup-modal .description-box {
-	padding: 1.8rem 3.6rem 3rem;
-}
-.popup-modal .description-box h4 {
-	font-family: "poppins-bold", sans-serif;
-	font-size: 1.5rem;
-	line-height: 2.4rem;
-	margin-bottom: .6rem;
-}
-.popup-modal .description-box p {
-	font-family: "poppins-regular", sans-serif;
-	font-size: 1.4rem;
-	line-height: 2.4rem;
-	margin-bottom: 12px;
-}
-.popup-modal .categories {
-	font-family: "poppins-bold", sans-serif;
-	font-size: 1.1rem;
-	line-height: 1.8rem;
-	text-transform: uppercase;
-	letter-spacing: .1rem;
-	display: block;
-	text-align: left;
-	color: rgba(0, 0, 0, 0.5);
-}
-.popup-modal .link-box {
-	width: 100%;
-	overflow: hidden;
-	background: #000000;
-}
-.popup-modal .link-box a {
-	font-family: "poppins-bold", sans-serif;
-	font-size: 1.2rem;
-	line-height: 6rem;
-	color: #FFFFFF;
-	text-transform: uppercase;
-	letter-spacing: 3px;
-	cursor: pointer;
-	display: block;
-	text-align: center;
-	float: left;
-	width: 50%;
-	-moz-transition: all 0.3s ease-in-out;
-	-o-transition: all 0.3s ease-in-out;
-	-webkit-transition: all 0.3s ease-in-out;
-	-ms-transition: all 0.3s ease-in-out;
-	transition: all 0.3s ease-in-out;
-}
-.popup-modal .link-box a:first-child {
-	border-right: 1px solid rgba(200, 200, 200, 0.1);
-}
-.popup-modal .link-box a:hover {
-	background: rgb(0, 141, 47);
-	border: none;
-}
-@media only screen and (max-width:600px) {
-	.popup-modal {
-		width: auto;
-		margin: 0 20px;
-	}
-}
 
-/**
- * transition effect for modal popup - (_layout.scss)
- * ------------------------------------------------------------------ 
- */
-
-/* overlay at start */
 .mfp-fade.mfp-bg {
 	opacity: 0;
 	-moz-transition: all 0.3s ease-in-out;
@@ -515,10 +499,6 @@ p.lead {
 	display: none;
 }
 
-/**
- * Media - (_basic.scss)
- * ------------------------------------------------------------------- 
- */
  img,
  video {
      max-width: 100%;
