@@ -426,6 +426,31 @@ body {
 .skill-bars li .percent95  { width: 95%; }
 .skill-bars li .percent100 { width: 100%; }
 
+#contact .effect {
+	width: 100%;
+	padding: 50px 0px 70px 0px;
+	background-color: #212121;
+}
+#contact .effect h2 {
+	color: #fff;
+	font-family: 'Playfair Display', serif;
+	font-weight: 400;
+	font-size: 25px;
+	letter-spacing: 3px;
+}
+#contact .effect:nth-child(2) {
+	margin-top: 50px;
+}
+#contact .effect:nth-child(2n+1) {
+	background-color: #fff;
+}
+#contact .effect:nth-child(2n+1) h2 {
+	color: #212121;
+}
+#contact .effect:nth-child(2n) a {
+	color: #fff;
+	border-color: #fff;
+}
 #contact .effect .buttons {
   margin-top: 30px;
   display: flex;
@@ -445,6 +470,23 @@ body {
   position: relative;
   color: #212121;
   border: 2px solid #212121;
+}
+#contact .effect a i {
+	position: relative;
+	z-index: 3;
+}
+#contact .effect a:last-child {
+	margin-right: 0px;
+}
+#contact .effect a:before {
+	content: "";
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+#contact .effect a i {
+	display: inline-block;
+	vertical-align: middle;
 }
 
 
