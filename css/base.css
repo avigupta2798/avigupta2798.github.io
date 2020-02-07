@@ -1,6 +1,5 @@
 
- #blogs {
-	background: #ebebeb;
+#blogs {
 	padding-top: 12rem;
 	padding-bottom: 12rem;
 }
@@ -32,7 +31,6 @@
     transition: all 0.5s ease-in-out;
     text-decoration: none;
 }
-
 #blogs .blog-item-table {
 	display: table;
 	width: 100%;
@@ -50,7 +48,6 @@
 	position: relative;
     left: -100%;
 }
-
 #blogs .blog-title {
 	color: #FFFFFF;
 	font-size: 2rem;
@@ -82,7 +79,7 @@ p.lead {
 	line-height: 1.8;
 	color: #888888;
 }
-@media only screen and (max-width:768px) {
+/*@media only screen and (max-width:768px) {
 	p.lead {
 		font-size: 1.7rem;
 	}
@@ -102,7 +99,7 @@ p.lead {
 	#blogs .blog-title {
 		font-size: 2.2rem;
 	}
-}
+}*/
 
 .row {
 	width: 94%;
@@ -195,7 +192,7 @@ p.lead {
 .col-full {
 	width: 100%;
 }
-
+/*
 @media screen and (max-width:1024px) {
 	.row .row {
 		margin-left: -18px;
@@ -306,7 +303,7 @@ p.lead {
 		float: none;
 	}
 
-}
+}*/
 
 .section-intro {
 	max-width: 700px;
@@ -330,7 +327,7 @@ p.lead {
 	margin-bottom: 0.3rem;
 	letter-spacing: .4rem;
 }
-
+/*
 @media only screen and (max-width:768px) {
 	.section-intro {
 		max-width: 650px;
@@ -352,7 +349,7 @@ p.lead {
 	.section-intro h1 {
 		font-size: 2.4rem;
 	}
-}
+}*/
 
 .col-twelve,
 .col-full {
@@ -369,7 +366,7 @@ p.lead {
 .block-1-2 .bgrid:nth-child(2n+1) {
 	clear: both;
 }
-
+/*
 @media screen and (max-width:600px) {
 	.block-mob-1-6 .bgrid {
 		width: 16.66667%;
@@ -414,14 +411,14 @@ p.lead {
 		margin-right: 0;
 	}
 
-}
+}*/
 
 .bgrid {
 	padding: 0 20px;
 }
 .bgrid {
 	float: left;
-}
+}/*
 @media only screen and (max-width:1024px) {
 	.bgrid {
 		padding: 0 18px;
@@ -441,7 +438,7 @@ p.lead {
 	.bgrid {
 		padding: 0;
 	}
-}
+}*/
 
 
 .mfp-fade.mfp-bg {
@@ -504,3 +501,65 @@ p.lead {
      max-width: 100%;
      height: auto;
  }
+
+#projects {
+	background: #ebebeb;
+	padding-top: 12rem;
+	padding-bottom: 12rem;
+}
+/* start portfolio */
+.portfolio-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
+
+.portfolio-item:last-child{
+    margin-bottom: 0;
+}
+
+.profile-img{
+    width: 50rem;
+    flex: 1;
+    /* height: 50rem; */
+}
+
+.portfolio-description{
+	padding-left: 5%;
+}
+
+.portfolio-description h1{
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 1rem 0;
+    font-style: italic;
+}
+
+.portfolio-description h6{
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 300;
+    opacity: 0.5;
+}
+
+.portfolio-description p{
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.portfolio-description .cta{
+    display: inline-block;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: #000;
+    font-style: oblique;
+    text-decoration: none;
+}
+
+.portfolio-description .cta:hover{
+    border-bottom: 2px solid #212121;
+	transition-duration: 0.2s;
+}
+
+/* end portfolio */
