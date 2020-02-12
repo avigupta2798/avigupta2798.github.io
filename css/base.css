@@ -17,6 +17,10 @@ body {
   	height: 100vh;
   	color: #212121;
 }
+nav {
+	transition: 0.3s;
+	float: right;
+}
 h1 {
 	font-family: serif;
 	font-size: 3.6rem;
@@ -169,9 +173,7 @@ img, video {
   color: #ff7676;
 }*/
 
-.header-menu li.active a {
-  	border-bottom: 2px solid #212121;
-}
+
 .header-menu li.active a:hover {
   	border-bottom: 2px solid #212121;
 }
@@ -193,6 +195,7 @@ img, video {
 	overflow: hidden;
 }
 .front .front-text {
+	float: right;
 	margin-top: 400px;
 	padding-left: 60px;
 	padding-right: 60px;
