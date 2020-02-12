@@ -21,6 +21,9 @@ nav {
 	transition: 0.3s;
 	float: right;
 }
+nav li a{
+	font-family: 'Montserrat';
+}
 h1 {
 	font-family: serif;
 	font-size: 3.6rem;
