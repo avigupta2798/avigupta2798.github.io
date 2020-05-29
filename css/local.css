@@ -1,4 +1,3 @@
-
 /* START: General Styling*/
 * {
     box-sizing: border-box;
@@ -249,46 +248,4 @@ p.lead {
 /* END: Project Styling */
 
 
-/* START: Contact Styling*/
-#contact {
-  background: #ebebeb;
-  padding-top: 12rem;
-  padding-bottom: 7.2rem;
-}
-#contact .effect .buttons {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-}
-#contact .effect a {
-    text-decoration: none;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin-right: 20px;
-    font-size: 25px;
-    overflow: hidden;
-    position: relative;
-    color: #212121;
-    border: 2px solid #212121;
-}
-/* amiens effect */
-#contact .effect.amiens a {
-    transition: all 0.2s linear 0.2s;
-}
-#contact .effect.amiens a i {
-    transition: all 0.2s linear 0s;
-}
-#contact .effect.amiens a:hover {
-    transition: all 0.2s linear 0s;
-    border-color: #ebebeb;
-}
-#contact .effect.amiens a:hover i {
-    transform: scale(1.5);
-    text-shadow: 4px 0px 3px rgba(33, 33, 33, 0.3);
-    transition: all 0.2s linear 0.2s;
-}
-/* END: Contact Styling*/
+
