@@ -1,0 +1,294 @@
+
+/* START: General Styling*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Caveat', sans-serif;
+    font-size: 1.5rem;
+    overflow-x: hidden;
+    position: relative;
+    height: 100vh;
+    color: #212121;
+}
+nav {
+  transition: 0.3s;
+  float: right;
+}
+nav li a{
+  font-family: 'Montserrat';
+}
+h1 {
+  font-family: serif;
+  font-size: 3.6rem;
+  color: #FFFFFF;
+  line-height: 1.25;
+  margin-bottom: 1.2rem;
+}
+h2 {
+  font-family: 'Caveat';
+  font-size: 200%;
+  color: #212121;
+  font-weight: 100;
+  letter-spacing: 3px;
+}
+h3 {
+  font-family: 'Montserrat';
+  font-size: 1.8rem;
+  font-weight: 1000;
+    text-transform: uppercase;
+    letter-spacing: .25rem;
+}
+h4 {
+  font-family: 'Satisfy';
+  font-size: 1.5rem;
+  font-weight: 500;
+    letter-spacing: 0.20rem;
+}
+h5 {
+  font-family: 'Montserrat';
+  color: rgb(16, 212, 25);
+  font-size: 4rem;
+  line-height: 1.875;
+  margin-bottom: 0.3rem;
+  letter-spacing: .4rem;
+}
+p {
+  font-family: 'Caveat';
+  font-size: 120%;
+}
+p.lead {
+  font-size: 2rem;
+  font-weight: 300;
+}
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+.section-intro {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 3.6rem;
+  position: relative;
+}
+.row {
+  width: 94%;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.row:before {
+  content: "";
+  display: table;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.row .row {
+  width: auto;
+  max-width: none;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+[class*="col-"],
+.bgrid {
+  float: left;
+}
+[class*="col-"] + [class*="col-"].end {
+  float: right;
+}
+[class*="col-"] {
+  padding: 0 20px;
+}
+
+.col-six, .col-1-2 {
+  width: 50%;
+}
+.col-twelve, .col-full {
+  width: 100%;
+}
+.bgrid {
+  padding: 0 20px;
+  float: left;
+}
+.block-1-2 .bgrid {
+  width: 50%;
+}
+.block-1-6 .bgrid:nth-child(6n+1), .block-1-4 .bgrid:nth-child(4n+1),
+.block-1-3 .bgrid:nth-child(3n+1), .block-1-2 .bgrid:nth-child(2n+1) {
+  clear: both;
+}
+/* END: General Styling*/
+
+
+/* START: Blogs Styling */ 
+#blogs {
+  padding-top: 12rem;
+  padding-bottom: 12rem;
+}
+#blogs .blog-item {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+#blogs .blog-item img {
+  vertical-align: middle;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+#blogs .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  text-decoration: none;
+}
+#blogs .blog-item-table {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+#blogs .blog-item-cell {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  left: -100%;
+}
+#blogs .blog-title {
+  color: #FFFFFF;
+  font-size: 2rem;
+  padding: 0 3rem;
+  margin-bottom: 0;
+}
+#blogs .blog-types {
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  font-family: "poppins-regular", sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: .1rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+#blogs .blog-item:hover .overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+#blogs .blog-item:hover .blog-item-cell {
+  left: 0;
+}
+#blogs .blog-item:hover img {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+p.lead {
+  font-size: 2rem;
+  line-height: 1.8;
+  color: #FFFFFF;
+}
+/* END: Blogs Styling */
+
+
+/* START: Project Styling*/
+#projects {
+  background: #ebebeb;
+  padding-top: 12rem;
+  padding-bottom: 12rem;
+}
+.project-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+.project-item:last-child {
+  margin-bottom: 0;
+}
+.profile-img {
+  width: 50rem;
+  flex: 1;
+}
+.project-description {
+  padding-top: 3%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.project-description .cta {
+  display: inline-block;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: #000;
+  font-style: oblique;
+  text-decoration: none;
+}
+.project-description .cta:hover {
+  border-bottom: 2px solid #212121;
+  transition-duration: 0.2s;
+}
+/* END: Project Styling */
+
+
+/* START: Contact Styling*/
+#contact {
+  background: #ebebeb;
+  padding-top: 12rem;
+  padding-bottom: 7.2rem;
+}
+#contact .effect .buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+#contact .effect a {
+    text-decoration: none;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 20px;
+    font-size: 25px;
+    overflow: hidden;
+    position: relative;
+    color: #212121;
+    border: 2px solid #212121;
+}
+/* amiens effect */
+#contact .effect.amiens a {
+    transition: all 0.2s linear 0.2s;
+}
+#contact .effect.amiens a i {
+    transition: all 0.2s linear 0s;
+}
+#contact .effect.amiens a:hover {
+    transition: all 0.2s linear 0s;
+    border-color: #ebebeb;
+}
+#contact .effect.amiens a:hover i {
+    transform: scale(1.5);
+    text-shadow: 4px 0px 3px rgba(33, 33, 33, 0.3);
+    transition: all 0.2s linear 0.2s;
+}
+/* END: Contact Styling*/

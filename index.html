@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/base.css">
     </head>
-    <body>
+    <body id="bg-img">
 
       <!-- START: HEADER-->
       <header>
@@ -24,16 +24,14 @@
         </div>
   
         <nav class="menu">
-          <div class="menu-branding">
-            <div class="portrait"></div>
-          </div>
+          <div class="menu-branding"></div>
           <ul class="menu-nav">
-            <li class="nav-item">
+            <li class="nav-item current">
               <a href="index.html" class="nav-link">
                 Home
               </a>
             </li>
-            <li class="nav-item current">
+            <li class="nav-item">
               <a href="about.html" class="nav-link">
                 About
               </a>
@@ -59,16 +57,15 @@
       <!-- END: HEADER-->
 
       <!-- START: FRONT -->
-      <section class="front" style="background-image:url(images/profile.jpg);">
-          <div class="container-fluid">
-              <div class="front-text">
-                    <h1 class="animated fadeInUp">Hello World, It's Avi</h1>
-                    <h2 class="animated fadeInUp">My Poems are same as my Codes.<br>
-                      One Compile in Compiler and Other in your Heart.</h2>
-                </div>
-            </div>
-            <span class="animated bounce"></span>
-      </section>
+      <main id="home">
+        <h1 class="lg-heading">
+          Hello World, It's Avi
+        </h1>
+        <h2 class="sm-heading">
+          My Poems are same as my Codes.<br>
+            One Compile in Compiler and Other in your Heart.
+        </h2>
+      </main>
       <!-- END: FRONT-->    
       <script src="js/main.js"></script>
     </body>
