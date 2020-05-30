@@ -623,6 +623,9 @@ img, video {
 	line-height: 1.8;
 	color: #FFFFFF;
   }
+  #post .apply-shadow{
+	  box-shadow: 3px 3px 4px 4px #c4c4c4;
+  }
   /* END: Blogs Styling */
   
   
