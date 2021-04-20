@@ -12,6 +12,7 @@
         <link href="https://fonts.googleapis.com/css?family=Caveat|Dancing+Script|Montserrat|Satisfy&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/contact.css">
     </head>
     <body>
 
@@ -64,7 +65,37 @@
            <h1>I'd Love To Hear From You.</h1>
            <p class="lead">Let's start a conversation. Get in touch with me!</p>
            <div class="embed-responsive embed-responsive-16by9">
-            <iframe width=150% height="500px" class="embed-responsive-item" src="https://docs.google.com/forms/d/e/1FAIpQLScgPXvBLySI_DQwrp9FWR0ABn6ogdQIzKbjY8z8-LEhdQCXxQ/viewform?usp=sf_link">Loading…</iframe></div><br><br>
+            <div class="container-contact100" style="margin-top: -60%;">
+              <div class="wrap-contact100">
+                  <form class="contact100-form validate-form" enctype=”multipart/form-data” role="form" action=”mailto:avibilasgupta@gmail.com” method="POST">
+                      <div class="wrap-input100 validate-input" data-validate="Name is required">
+                          <label for="name"><span class="label-input100">Your Name</span></label>
+                          <input id="name" class="input100" type="text" name="name" placeholder="Enter your name">
+                          <span class="focus-input100"></span>
+                      </div>
+          
+                      <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                          <label for="email"><span class="label-input100">Email</span></label>
+                          <input id="email" class="input100" type="email" name="email" placeholder="Enter your email addess">
+                          <span class="focus-input100"></span>
+                      </div>
+                  
+                      <div class="wrap-input100 validate-input" data-validate = "Message is required">
+                          <label for="message"><span class="label-input100">Message</span></label>
+                          <textarea id="message" class="input100" name="desc" placeholder="Your message here..."></textarea>
+                          <span class="focus-input100"></span>
+                      </div>
+          
+                      <div class="container-contact100-form-btn">
+                          <div class="wrap-contact100-form-btn">
+                              <div class="contact100-form-bgbtn"></div>
+                              <button class="contact100-form-btn" type="submit"><span> Submit</span></button>
+                          </div>
+                      </div>
+                      
+                  </form>
+              </div>
+          </div>
             <h3>Find Me Here:
             <div class="effect amiens">
                 <div class="buttons">
