@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv=content-type content="text/html; charset=utf-8" />
+        <meta http-equiv=X-UA-Compatible content="IE=edge" />
+        <meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Home</title>
+        <meta name=description content="Alfaaz(@alfaaz_adgitm)" />
+        <meta name=keywords content="Alfaaz, alfaaz_adgitm, Official Poetry and Creative Writing Society of ADGITM" />
+        <meta name=author content=Alfaaz />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+        <link href="https://fonts.googleapis.com/css?family=Caveat|Dancing+Script|Montserrat|Satisfy&display=swap" rel="stylesheet">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+        {% block css %} {% endblock %}
+    </head>
+    <body>
+
+      <!-- START: HEADER-->
+      <header>
+        <div class="menu-btn">
+          <div class="btn-line"></div>
+          <div class="btn-line"></div>
+          <div class="btn-line"></div>
+        </div>
+  
+        <nav class="menu">
+          <div class="menu-branding"></div>
+          <ul class="menu-nav">
+            <li class="nav-item">
+                <a href="{% url 'home' %}" class="nav-link">Home</a></li>
+
+            <!--<li class="nav-item">
+                <a href="" class="nav-link">About</a></li>-->
+
+            <li class="nav-item">
+                <a href="{% url 'about' %}" class="nav-link">About</a></li>
+            <li class="nav-item">
+              <a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+      <!-- END: HEADER-->
+
+      <div class="main-overlay">
+        <div class="overlay-full"></div>
+      </div>
+      
+      {% block body_block %}
+      {% endblock %}
+      <script src="{% static 'js/main.js' %}"></script>
+    </body>
+    </html>

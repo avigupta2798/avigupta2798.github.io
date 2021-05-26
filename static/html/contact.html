@@ -1,0 +1,74 @@
+
+      {% extends 'base.html' %}
+      {% block body_block %}
+      {% load static %}
+      <!-- START: Contact-->
+    <section id="contact">
+      <div class="row section-intro">
+         <div class="col-twelve">
+           <h5>Contact</h5>
+           <h1>I'd Love To Hear From You.</h1>
+           <p class="lead">Let's start a conversation. Get in touch with me!</p>
+           <div class="embed-responsive embed-responsive-16by9">
+            <div class="container-contact100" style="margin-top: -60%;">
+              <div class="wrap-contact100">
+                  <form action='' class="contact100-form validate-form" role="form" enctype=”multipart/form-data” method="post">
+                    {% csrf_token %}
+                      <div class="wrap-input100 validate-input" data-validate="Name is required">
+                          <label for="name"><span class="label-input100">Your Name</span></label>
+                          <input id="name" class="input100" type="text" name="name" placeholder="Enter your name">
+                          <span class="focus-input100"></span>
+                      </div>
+          
+                      <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                          <label for="email"><span class="label-input100">Email</span></label>
+                          <input id="email" class="input100" type="email" name="email" placeholder="Enter your email addess">
+                          <span class="focus-input100"></span>
+                      </div>
+                  
+                      <div class="wrap-input100 validate-input" data-validate = "Message is required">
+                          <label for="message"><span class="label-input100">Message</span></label>
+                          <textarea id="message" class="input100" name="desc" placeholder="Your message here..."></textarea>
+                          <span class="focus-input100"></span>
+                      </div>
+          
+                      <div class="container-contact100-form-btn">
+                          <div class="wrap-contact100-form-btn">
+                              <div class="contact100-form-bgbtn"></div>
+                              <button class="contact100-form-btn" type="submit"><span> Submit</span></button>
+                          </div>
+                      </div>
+                      
+                  </form>
+              </div>
+          </div>
+            <h3>Find Me Here:
+            <div class="effect amiens">
+                <div class="buttons">
+                  <a href="https://www.facebook.com/avigupta2798" class="facebook" title="Facebook" target="_blank"><i class="fa fa-facebook-f" aria-hidden="true"></i></a>
+                  <a href="https://twitter.com/avi__gupta" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                  <a href="https://www.linkedin.com/in/avi-g-35811996/" class="linkedin" title="LinkedIn" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                  <a href="mailto:avibilasgupta@gmail.com" class="mail" title="Mail" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                  <a href="https://www.instagram.com/_aviguptaa/" class="instagram" title="Instagram" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                  <a href="https://github.com/avigupta2798" class="github" title="Github" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+                  <a href="images/Resume.pdf" class="resume" title="Resume" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            </h3>
+          </div> 
+      </div>
+    </section>
+    <!-- END: Contact-->
+
+      <!-- START: Footer-->
+     <footer id="main-footer">
+      <div class="footer-copyright text-center py-3">
+        Made with <i class="fa fa-heart"></i> by Avi Gupta
+        <br>
+        <i class="fa fa-copyright"></i> Avi Gupta, All rights reserved.
+      </div>
+     </footer>  
+    <!-- END: Footer-->
+    
+    <script src="js/main.js"></script>
+    {% endblock %}
