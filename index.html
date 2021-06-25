@@ -155,12 +155,21 @@
         <div class="row">
           <div class="col-md-12">
             <div class="p-4 mb-3 bg-white">
+              <form method="post" name="contact_form" action="contact-form-handler.php">
+        Your Name:
+        <input type="text" name="name">
+        Email Address:
+        <input type="text" name="email">
+        Message:
+        <textarea name="message"></textarea>
+        <input type="submit" value="Submit">
+    </form>
               <p class="mb-0 font-weight-bold">Name</p>
               <p class="mb-4">Avi Gupta</p>
               <p class="mb-0 font-weight-bold">Phone</p>
               <p class="mb-4"><a href="tel:+91 98996 12959">+91 98996 12959</a></p>
               <p class="mb-0 font-weight-bold">Email Address</p>
-              <p class="mb-0"><a href="mailto:avibilasgupta@gmail.com">avibilasgupta@gmail.com</a></p>
+              <p class="mb-0"><a href="mailto:avibilasgupta@gmail.com">avibilasgupta@gmail.com</a></p>          
             </div>
           </div>
         </div>
@@ -199,6 +208,13 @@
     <script src="js/bootstrap-datepicker.min.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/main.js"></script>
+    <script language="JavaScript">
+      var frmvalidator  = new Validator("contact_form");
+      frmvalidator.addValidation("name","req","Please provide your name");
+      frmvalidator.addValidation("email","req","Please provide your email");
+      frmvalidator.addValidation("email","email",
+        "Please enter a valid email address");
+      </script>
     
   </body>
 </html>
