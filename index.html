@@ -155,15 +155,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="p-4 mb-3 bg-white">
-              <form method="post" name="contact_form" action="contact-form-handler.php">
-        Your Name:
-        <input type="text" name="name">
-        Email Address:
-        <input type="text" name="email">
-        Message:
-        <textarea name="message"></textarea>
-        <input type="submit" value="Submit">
-    </form>
+             
               <p class="mb-0 font-weight-bold">Name</p>
               <p class="mb-4">Avi Gupta</p>
               <p class="mb-0 font-weight-bold">Phone</p>
@@ -175,6 +167,7 @@
         </div>
       </div>
     </div>
+    <a style="width: 50px;" href="https://clustrmaps.com/site/1birw" title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=1ydCNace7oDr__IMWZURo9gk94969TmT94OaL6ox5-Q&cl=ffffff"></a>
 
     <footer class="site-footer">
       <div class="col-md-12 text-center pad">
@@ -194,7 +187,6 @@
         </div>
       </div>
     </footer>
-  
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -208,13 +200,5 @@
     <script src="js/bootstrap-datepicker.min.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/main.js"></script>
-    <script language="JavaScript">
-      var frmvalidator  = new Validator("contact_form");
-      frmvalidator.addValidation("name","req","Please provide your name");
-      frmvalidator.addValidation("email","req","Please provide your email");
-      frmvalidator.addValidation("email","email",
-        "Please enter a valid email address");
-      </script>
-    
-  </body>
+ </body>
 </html>
