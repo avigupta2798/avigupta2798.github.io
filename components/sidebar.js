@@ -118,8 +118,8 @@
         '<div class="sidebar__name"><a href="' + abs('index.html') + '">' + esc(IDENTITY.name) + '</a></div>' +
         '<div class="sidebar__role">' + IDENTITY.role + '</div>' +
       '</div>' +
-      '<nav class="nav" aria-label="Main">' + groups + '</nav>' +
       '<div class="iconrow">' + icons + '</div>' +
+      '<nav class="nav" aria-label="Main">' + groups + '</nav>' +
     '</aside>';
 
   var controlsHTML =
