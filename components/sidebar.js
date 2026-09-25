@@ -18,7 +18,7 @@
   --------------------------------------------------------------------- */
   var IDENTITY = {
     name:  'Avi Gupta',
-    role:  'Ph.D. Student, Computer Science<br>IIIT-Delhi, India',
+    role:  'Ph.D. Candidate, Computer Science<br>IIIT-Delhi, India',
     photo: 'assets/img/profile.jpg'
   };
 
@@ -53,9 +53,9 @@
   --------------------------------------------------------------------- */
   var ICONS = [
     { label: 'Email',            url: 'mailto:avig@iiitd.ac.in' },
-    { label: 'Google Scholar',   url: 'https://scholar.google.com/citations?user=YOUR_ID' },
+    { label: 'Google Scholar',   url: 'https://scholar.google.com/citations?user=V4fejFYAAAAJ&hl=en' },
     { label: 'GitHub',           url: 'https://github.com/avigupta2798' },
-    { label: 'LinkedIn',         url: 'https://www.linkedin.com/in/YOUR_HANDLE' },
+    { label: 'LinkedIn',         url: 'https://www.linkedin.com/in/avigupta2798' },
     { label: 'CV',               url: 'assets/CV_AviGupta.pdf' }
   ];
 
