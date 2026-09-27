@@ -127,7 +127,7 @@ img { max-width: 100%; display: block; }
 .sidebar::-webkit-scrollbar-track { background: transparent; }
 .sidebar::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 99px; }
 
-.sidebar__identity { display: flex; flex-direction: column; align-items: center; gap: 7px; text-align: center; }
+.sidebar__identity { display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
 
 .sidebar__photo {
   width: 98px;

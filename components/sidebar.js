@@ -117,8 +117,8 @@
         '<img class="sidebar__photo" src="' + abs(IDENTITY.photo) + '" alt="' + esc(IDENTITY.name) + '">' +
         '<div class="sidebar__name"><a href="' + abs('index.html') + '">' + esc(IDENTITY.name) + '</a></div>' +
         '<div class="sidebar__role">' + IDENTITY.role + '</div>' +
-      '</div>' +
-      '<div class="iconrow">' + icons + '</div>' +
+      
+      '<div class="iconrow">' + icons + '</div>' + '</div>' +
       '<nav class="nav" aria-label="Main">' + groups + '</nav>' +
     '</aside>';
 
