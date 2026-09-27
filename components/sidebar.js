@@ -36,9 +36,9 @@
     ]],
     ['Research', [
       ['research-about/index.html',      'About'],
-      ['projects/index.html',            'Projects'],
+      /*['projects/index.html',            'Projects'],*/
       ['publications/index.html',        'Publications'],
-      ['code-resources/index.html',      'Code / Resources']
+      /*['code-resources/index.html',      'Code / Resources']*/
     ]],
     ['Misc', [
       ['professional-activities/index.html', 'Service'],
