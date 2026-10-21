@@ -60,6 +60,10 @@ html[data-theme="dark"]{
 }
 .tbl th,.tbl td{ padding:9px 10px; text-align:right; border-bottom:1px solid var(--rule); }
 .tbl th:first-child,.tbl td:first-child{ text-align:left; padding-left:0; }
+/* The benchmark cell is the 2nd cell in each backbone's first row (after the
+   rowspan name) and the 1st in the two rows below, so position-based rules
+   split the column in two. Target it by class instead. */
+.tbl th.bm,.tbl td.bm{ text-align:left; padding-left:10px; }
 .tbl td:last-child,.tbl th:last-child{ padding-right:0; }
 .tbl thead th{
   font-weight:600; font-size:12.5px; color:var(--ink-faint);
@@ -90,11 +94,14 @@ html[data-theme="dark"]{
   .tbl th,.tbl td{ padding:8px; }
 }
 
+/* Video box: 574 x 369 inside the frame — 0.7 and 0.45 of the 820px column.
+   596 = 574 + 2x10px padding + 2x1px border. aspect-ratio keeps that exact
+   shape on desktop and scales it down proportionally on a phone. */
 .film{ margin:0; border:1px solid var(--rule); background:var(--surface);
-       padding:10px; border-radius:var(--radius); max-width:596px; align-self:center; }
+       padding:10px; border-radius:var(--radius); max-width:596px; }
 .film video,
 .film img{ width:100%; aspect-ratio:574/369; height:auto; object-fit:contain;
-           background:var(--ground); border-radius:3px; align-self:center; }
+           background:var(--ground); border-radius:3px; }
 .film figcaption{ font-family:var(--font-ui); font-size:13px; color:var(--ink-faint);
                   padding:10px 2px 0; display:flex; justify-content:space-between; gap:16px; }
 .film button{ font:inherit; color:var(--ink-faint); background:none; border:0; padding:0;
@@ -126,11 +133,10 @@ html[data-theme="dark"]{
         Koteswar Rao Jerripothula · Tammam Tillo
       </div>
 
-      <!-- EDIT ME: replace the three href values below -->
       <div class="pub__links" style="margin-top:16px">
         <a class="chip" href="#">Paper</a>
-        <a class="chip" href="#">arXiv</a>
-        <a class="chip" href="#">Code</a>
+        <a class="chip" href="https://arxiv.org/abs/2610.27298">arXiv</a>
+        <a class="chip" href="https://github.com/avigupta2798/MFM-CIL">Code</a>
         <a class="chip" href="#bibtex">BibTeX</a>
       </div>
 
@@ -142,13 +148,6 @@ html[data-theme="dark"]{
                  aria-label="Overview of the method and results">
             <source src="../assets/vid/mfm-cil.mp4" type="video/mp4">
           </video>
-          <!-- If the video will not play, convert it to a GIF and swap the whole
-               <video> element above for this one line:
-               <img src="../assets/img/mfm-cil.gif" alt="Overview of the method and results">
-               then delete the <figcaption> below, since there is nothing to pause. -->
-          <figcaption>
-           <!--  <button id="toggle" type="button">Pause</button>-->
-          </figcaption>
         </figure>
       </div>
 
@@ -169,16 +168,10 @@ html[data-theme="dark"]{
         benchmarks demonstrate that our approach consistently outperforms state-of-the-art methods.</p>
       </div>
 
-      <!-- EDIT ME: point src at your architecture figure, or delete this section. -->
-      <div class="section">
-        <h2 class="section__title">The framework</h2>
-        <img src="../assets/img/architecture.png" alt="Frozen audio and visual encoders feed an attention-based contextual guidance module, supervised by feature- and logit-level distillation.">
-        <p class="edu__where" style="margin-top:12px">Frozen audio and visual encoders feed an attention-based
-        contextual guidance module; feature- and logit-level distillation hold the previous task's state in place.</p>
-      </div>
-
       <div class="section">
         <h2 class="section__title">Four findings</h2>
+        <p class="edu__where" style="margin-top:12px">Frozen audio and visual encoders feed an attention-based
+        contextual guidance module; feature- and logit-level distillation hold the previous task's state in place.</p>
         <ul class="points">
           <li><span class="n">01</span><p>Frozen MFMs — <b>SAM-Audio</b>, <b>ImageBind</b> and
             <b>Qwen2.5-Omni-3B</b> — generalize to audio-visual class-incremental learning, but their
@@ -204,24 +197,24 @@ html[data-theme="dark"]{
           and our model use identical frozen encoders, so the margin measures the architecture rather
           than the feature extractor.</caption>
           <thead>
-            <tr><th scope="col">Frozen backbone</th><th scope="col">Benchmark</th>
+            <tr><th scope="col">Frozen backbone</th><th scope="col" class="bm">Benchmark</th>
                 <th scope="col">AV-CIL</th><th scope="col">Ours</th><th scope="col">&#916;</th></tr>
           </thead>
           <tbody>
-            <tr><th scope="row" rowspan="3">ImageBind</th><td>AVE-CI</td>
+            <tr><th scope="row" rowspan="3">ImageBind</th><td class="bm">AVE-CI</td>
                 <td class="base">85.80</td><td class="ours">91.48</td><td class="gain">+5.68</td></tr>
-            <tr><td>VS100-CI</td><td class="base">77.70</td><td class="ours">84.94</td><td class="gain">+7.24</td></tr>
-            <tr><td>K-S-CI</td><td class="base">77.96</td><td class="ours">86.29</td><td class="gain">+8.33</td></tr>
+            <tr><td class="bm">VS100-CI</td><td class="base">77.70</td><td class="ours">84.94</td><td class="gain">+7.24</td></tr>
+            <tr><td class="bm">K-S-CI</td><td class="base">77.96</td><td class="ours">86.29</td><td class="gain">+8.33</td></tr>
 
-            <tr><th scope="row" rowspan="3">SAM-Audio</th><td>AVE-CI</td>
+            <tr><th scope="row" rowspan="3">SAM-Audio</th><td class="bm">AVE-CI</td>
                 <td class="base">84.38</td><td class="ours">88.68</td><td class="gain">+4.30</td></tr>
-            <tr><td>VS100-CI</td><td class="base">74.04</td><td class="ours">79.64</td><td class="gain">+5.60</td></tr>
-            <tr><td>K-S-CI</td><td class="base">80.21</td><td class="ours">84.01</td><td class="gain">+3.80</td></tr>
+            <tr><td class="bm">VS100-CI</td><td class="base">74.04</td><td class="ours">79.64</td><td class="gain">+5.60</td></tr>
+            <tr><td class="bm">K-S-CI</td><td class="base">80.21</td><td class="ours">84.01</td><td class="gain">+3.80</td></tr>
 
-            <tr><th scope="row" rowspan="3">Qwen2.5-Omni-3B</th><td>AVE-CI</td>
+            <tr><th scope="row" rowspan="3">Qwen2.5-Omni-3B</th><td class="bm">AVE-CI</td>
                 <td class="base">82.98</td><td class="ours">86.14</td><td class="gain">+3.16</td></tr>
-            <tr><td>VS100-CI</td><td class="base">80.43</td><td class="ours">82.40</td><td class="gain">+1.97</td></tr>
-            <tr><td>K-S-CI</td><td class="base">79.32</td><td class="ours">81.85</td><td class="gain">+2.53</td></tr>
+            <tr><td class="bm">VS100-CI</td><td class="base">80.43</td><td class="ours">82.40</td><td class="gain">+1.97</td></tr>
+            <tr><td class="bm">K-S-CI</td><td class="base">79.32</td><td class="ours">81.85</td><td class="gain">+2.53</td></tr>
           </tbody>
         </table>
         </div>
