@@ -175,16 +175,15 @@ html[data-theme="dark"]{
         <ul class="points">
           <li><span class="n">01</span><p>Frozen MFMs — <b>SAM-Audio</b>, <b>ImageBind</b> and
             <b>Qwen2.5-Omni-3B</b> — generalize to audio-visual class-incremental learning, but their
-            strong priors do not by themselves solve incremental recognition. Adaptation has to be
-            targeted, not naive feature reuse.</p></li>
+            strong priors do not by themselves solve incremental recognition.</p></li>
           <li><span class="n">02</span><p>Cross-modal attention uses <b>audio as task-stable contextual
             guidance</b> for visual representations. The design holds across all three foundation
-            models, so it is a property of the method rather than of one encoder.</p></li>
+            models.</p></li>
           <li><span class="n">03</span><p><b>Feature- and logit-level distillation</b> balances the
             current task's representations against the previous task's state, and accounts for most of
             the reduction in forgetting.</p></li>
           <li><span class="n">04</span><p>Across three benchmarks, the framework improves over both
-            unimodal and multimodal CIL baselines — with every backbone held fixed between the
+            unimodal and multimodal CIL baselines, with every backbone held fixed between the
             baseline and our model.</p></li>
         </ul>
       </div>
