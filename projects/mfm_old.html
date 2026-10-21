@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generalizing Multimodal Foundational Models in Context-Driven Class-Incremental Learning — Avi Gupta</title>
+<meta name="description" content="WACV 2027. A framework that generalizes frozen multimodal foundational models to audio-visual class-incremental learning, using audio as task-stable contextual guidance for visual features.">
+
+<meta property="og:url" content="https://avigupta2798.github.io/mfm-cil/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Generalizing Multimodal Foundational Models in Context-Driven Class-Incremental Learning">
+<meta property="og:description" content="WACV 2027 — frozen multimodal foundational models, adapted for audio-visual class-incremental learning.">
+<meta property="og:image" content="https://avigupta2798.github.io/assets/img/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://avigupta2798.github.io/assets/img/og-cover.jpg">
+
+<link rel="icon" href="../assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  // Set the theme before first paint so there is no flash.
+  try { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+
+<style>
+/* =========================================================================
+   Project page — layout and components for this page only.
+
+   The sidebar, the theme toggle and every site token are left exactly as the
+   stylesheet defines them, so the left bar here is identical to every other
+   page. Everything below is scoped to .project and never touches them.
+   ========================================================================= */
+
+.project{
+  /* your original project-page palette */
+  --p-ground: #f4efe6;   /* off-white page ground */
+  --p-strip:  #efe8dc;   /* the WACV bar          */
+  --p-card:   #fbf8f2;   /* panels and buttons    */
+  --p-rule:   #ddd3c3;   /* hairlines             */
+  --p-accent: #2f49b8;   /* your indigo           */
+  --p-down:   #b2403f;   /* baseline numbers      */
+  --p-up:     #156b4e;   /* our gains             */
+
+  --rail:    170px;      /* the italic marginalia column */
+  --projcol: 810px;      /* the text column — widen to grow the page rightward */
+}
+html[data-theme="dark"] .project{
+  --p-ground: #171614;
+  --p-strip:  #1b1916;
+  --p-card:   #1e1c19;
+  --p-rule:   #332f2a;
+  --p-accent: #93a6f0;
+  --p-down:   #e89a92;
+  --p-up:     #6fd1a6;
+}
+
+/* ---------- shell: this page manages its own width ---------- */
+.main.project{ display:block; padding:0 0 96px; background:var(--p-ground); }
+
+/* ---------- venue strip: shares the bar with the theme toggle ---------- */
+.proj-strip{
+  position:sticky; top:0; z-index:30;
+  background:var(--p-strip);
+  border-bottom:1px solid var(--p-rule);
+  padding:19px 96px 19px 48px;
+  display:flex; gap:14px; align-items:center;
+  font-family:var(--font-ui); font-size:12.5px; font-weight:600;
+  letter-spacing:.09em; text-transform:uppercase;
+  color:var(--p-accent);
+}
+.proj-strip span{ color:var(--ink-faint); font-weight:500; letter-spacing:.04em; }
+
+/* the floating toggle is lifted up into that strip, on this page only */
+body.project-page .theme-toggle{ top:8px; right:28px; }
+
+/* ---------- page grid: marginalia rail + content column ---------- */
+.proj-wrap{ max-width:1120px; margin:0 auto; padding:0 48px; }
+.proj-row{
+  display:grid;
+  grid-template-columns:var(--rail) minmax(0,var(--projcol));
+  gap:0 44px; align-items:start;
+}
+.mark{
+  font-family:var(--font-body); font-style:italic; font-size:15px;
+  color:var(--ink-faint); padding-top:5px; text-align:right;
+  border-right:1px solid var(--p-rule); padding-right:22px; margin-right:-22px;
+  min-height:2.4em;
+}
+.proj-body{ min-width:0; }
+.project section.proj-row{ padding-top:48px; }
+.project a{ color:var(--p-accent); }
+.project a:hover{ color:var(--p-accent); border-bottom-color:currentColor; }
+
+/* ---------- hero ---------- */
+.proj-hero{ padding:56px 0 6px; }
+.proj-hero h1{
+  font-family:var(--font-display); font-weight:600;
+  font-size:clamp(30px,3.3vw,42px); line-height:1.16; letter-spacing:-.018em;
+  margin:0 0 24px; max-width:27ch; color:var(--ink);
+}
+.authors{ font-size:17.5px; line-height:1.75; color:var(--ink-soft); margin:0 0 6px; max-width:62ch; }
+.authors b{ font-weight:600; color:var(--ink); }
+.affil{ font-size:15px; color:var(--ink-faint); margin:8px 0 0; font-style:italic; }
+
+/* ---------- link buttons ---------- */
+.links{ display:flex; flex-wrap:wrap; gap:9px; margin:28px 0 0; padding:0; list-style:none; }
+.project .links a{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--font-ui); font-size:14.5px; font-weight:500;
+  color:var(--ink-soft); border:1px solid var(--p-rule); border-radius:999px;
+  background:var(--p-card); padding:9px 16px;
+  transition:border-color .15s, color .15s;
+}
+.project .links a:hover{ border-color:var(--p-accent); color:var(--p-accent); }
+.links svg{ width:15px; height:15px; flex:none; stroke:currentColor; fill:none; stroke-width:1.7; }
+
+/* ---------- media ---------- */
+.film{
+  margin:0; max-width:620px;
+  border:1px solid var(--p-rule); background:var(--p-card);
+  padding:10px; border-radius:var(--radius);
+}
+.film video{ width:100%; border-radius:3px; background:var(--p-ground); display:block; }
+.film figcaption{
+  font-family:var(--font-ui); font-size:13px; color:var(--ink-faint);
+  padding:11px 2px 1px; display:flex; justify-content:space-between; gap:16px;
+}
+.film button{
+  font:inherit; font-size:13px; color:var(--ink-faint); background:none; border:0;
+  padding:0; cursor:pointer; text-decoration:underline; text-underline-offset:3px;
+}
+.film button:hover{ color:var(--p-accent); }
+
+.figure{ margin:0; }
+.figure img{ width:100%; border:1px solid var(--p-rule); border-radius:var(--radius); background:var(--p-card); }
+.figure figcaption{
+  font-family:var(--font-ui); font-size:13.5px; color:var(--ink-faint);
+  line-height:1.6; padding-top:12px;
+}
+
+/* ---------- headings & text ---------- */
+.proj-body h2{
+  font-family:var(--font-display); font-weight:600; font-size:25px;
+  letter-spacing:-.012em; margin:0 0 16px; color:var(--ink);
+}
+.proj-body p{ margin:0 0 17px; }
+.proj-body p:last-child{ margin-bottom:0; }
+.lede{ font-size:19.5px; }
+
+/* ---------- contributions ---------- */
+.points{ margin:0; padding:0; list-style:none; border-top:1px solid var(--p-rule); }
+.points li{
+  display:grid; grid-template-columns:30px 1fr; gap:16px;
+  padding:16px 0; border-bottom:1px solid var(--p-rule);
+}
+.points .n{
+  font-family:var(--font-ui); font-size:13px; font-weight:600;
+  color:var(--p-accent); padding-top:5px; font-variant-numeric:tabular-nums;
+}
+.points p{ margin:0; font-size:17px; line-height:1.58; }
+.points b{ font-weight:600; }
+
+/* ---------- results ---------- */
+/* the table has a hard minimum width, so on narrow screens it scrolls inside
+   its own box rather than pushing the whole page sideways */
+.tbl-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.tbl{ width:100%; border-collapse:collapse; font-family:var(--font-ui); font-size:15px; }
+.tbl caption{
+  text-align:left; font-family:var(--font-body); font-size:16.5px;
+  color:var(--ink-soft); margin-bottom:14px; line-height:1.5;
+}
+.tbl th,.tbl td{ padding:9px 10px; text-align:right; border-bottom:1px solid var(--p-rule); }
+.tbl th:first-child,.tbl td:first-child{ text-align:left; padding-left:0; }
+.tbl td:last-child,.tbl th:last-child{ padding-right:0; }
+.tbl thead th{
+  font-weight:600; font-size:12.5px; color:var(--ink-faint);
+  border-bottom:1px solid var(--ink); letter-spacing:.02em;
+}
+.tbl tbody th{ font-weight:500; color:var(--ink); }
+.tbl td{ font-variant-numeric:tabular-nums; color:var(--ink-soft); }
+.tbl .base{ color:var(--p-down); }
+.tbl .ours{ color:var(--ink); font-weight:600; }
+.tbl .gain{ color:var(--p-up); font-weight:600; }
+.tbl tbody tr:last-child td,.tbl tbody tr:last-child th{ border-bottom:0; }
+.tbl tbody tr:nth-last-child(3) th[rowspan]{ border-bottom:0; }
+.tbl thead th:nth-child(n+3){ white-space:nowrap; }
+.note{ font-size:15px; color:var(--ink-faint); margin:14px 0 0; line-height:1.55; }
+
+.forget{
+  display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  margin:26px 0 0; padding:18px 20px;
+  background:var(--p-card); border:1px solid var(--p-rule); border-radius:var(--radius);
+}
+.forget .f-l{ font-size:16px; color:var(--ink-soft); }
+.forget .f-n{ font-family:var(--font-ui); font-variant-numeric:tabular-nums; font-size:26px; font-weight:600; }
+.forget .from{ color:var(--p-down); }
+.forget .to{ color:var(--p-up); }
+.forget .arw{ color:var(--ink-faint); font-size:20px; }
+
+/* ---------- setup chips ---------- */
+.chips{ display:flex; flex-wrap:wrap; gap:8px; margin:0; padding:0; list-style:none; }
+.chips li{
+  font-family:var(--font-ui); font-size:14px; color:var(--ink-soft);
+  border:1px solid var(--p-rule); background:var(--p-card);
+  border-radius:999px; padding:7px 14px;
+}
+.chips li b{ font-weight:600; color:var(--ink); }
+
+/* ---------- bibtex ---------- */
+.cite{ position:relative; border:1px solid var(--p-rule); background:var(--p-card); border-radius:var(--radius); }
+.cite pre{
+  margin:0; padding:20px 20px 22px; overflow-x:auto;
+  font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  font-size:13.5px; line-height:1.72; color:var(--ink-soft);
+}
+.copy{
+  position:absolute; top:10px; right:10px;
+  font-family:var(--font-ui); font-size:13px; font-weight:500;
+  color:var(--ink-soft); background:var(--p-ground);
+  border:1px solid var(--p-rule); border-radius:999px;
+  padding:6px 13px; cursor:pointer; transition:border-color .15s, color .15s;
+}
+.copy:hover{ border-color:var(--p-accent); color:var(--p-accent); }
+.copy[data-done="1"]{ color:var(--p-up); border-color:var(--p-up); }
+
+/* ---------- foot ---------- */
+.proj-foot{ margin-top:76px; }
+.proj-foot .proj-body{
+  border-top:1px solid var(--p-rule); padding-top:22px;
+  font-family:var(--font-ui); font-size:13.5px; color:var(--ink-faint);
+  display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;
+}
+.project .proj-foot a{ color:var(--ink-faint); }
+.project .proj-foot a:hover{ color:var(--p-accent); }
+
+/* ---------- one page-load reveal ---------- */
+.rise{ opacity:0; transform:translateY(9px); animation:rise .62s cubic-bezier(.22,.8,.3,1) forwards; }
+.rise:nth-child(2){ animation-delay:.07s; }
+@keyframes rise{ to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion:reduce){ .rise{ animation:none; opacity:1; transform:none; } }
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .proj-wrap{ padding:0 36px; }
+  .proj-strip{ padding-left:36px; }
+}
+@media (max-width:980px){
+  .project{ --rail:0px; }
+  .proj-row{ grid-template-columns:1fr; gap:0; }
+  .mark{
+    border-right:0; padding:0 0 7px; margin:0; text-align:left;
+    min-height:0; font-size:14px;
+  }
+  .project section.proj-row{ padding-top:40px; }
+}
+@media (max-width:820px){
+  /* leave room for the hamburger, which sits over this strip */
+  .proj-strip{ padding:17px 86px 17px 72px; }
+  .tbl{ font-size:14px; }
+  .tbl th,.tbl td{ padding:8px; }
+  .tbl-scroll{ margin-right:-24px; padding-right:24px; }
+  .proj-wrap{ padding:0 24px; }
+  .proj-hero{ padding:40px 0 4px; }
+  .proj-foot{ margin-top:56px; }
+}
+@media (max-width:480px){
+  .proj-strip{ padding:17px 72px 17px 64px; font-size:11.5px; letter-spacing:.05em; gap:10px; }
+}
+</style>
+</head>
+<body class="project-page">
+
+<div class="layout">
+  <div id="site-sidebar"></div>
+
+  <main class="main project">
+
+    <div class="proj-strip">WACV&nbsp;2027 <span>Algorithms Track</span></div>
+
+    <div class="proj-wrap">
+
+      <!-- ============================= HERO ============================= -->
+      <header class="proj-row proj-hero">
+        <div class="mark"></div>
+        <div class="proj-body">
+          <h1 class="rise">Generalizing Multimodal Foundational Models in Context-Driven Class-Incremental Learning</h1>
+
+          <div class="rise">
+            <p class="authors">
+              <b>Avi&nbsp;Gupta</b> &nbsp;·&nbsp; Nilotpal&nbsp;Sinha &nbsp;·&nbsp; Vishnu&nbsp;Raj &nbsp;·&nbsp;
+              Sambuddha&nbsp;Saha &nbsp;·&nbsp; Pratik&nbsp;Joshi &nbsp;·&nbsp;
+              Koteswar&nbsp;Rao&nbsp;Jerripothula &nbsp;·&nbsp; Tammam&nbsp;Tillo
+            </p>
+            <!-- EDIT ME: add affiliations here, e.g.
+            <p class="affil">IIIT-Delhi &nbsp;·&nbsp; …</p> -->
+
+            <!-- EDIT ME: replace the three href values below -->
+            <ul class="links">
+              <li><a href="#">
+                <svg viewBox="0 0 24 24"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h4"/></svg>
+                Paper</a></li>
+              <li><a href="#">
+                <svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>
+                arXiv</a></li>
+              <li><a href="#">
+                <svg viewBox="0 0 24 24"><path d="M9 18l-5-6 5-6"/><path d="M15 6l5 6-5 6"/></svg>
+                Code</a></li>
+              <li><a href="#bibtex">
+                <svg viewBox="0 0 24 24"><path d="M5 4h10l4 4v12H5z"/><path d="M8 12h8"/><path d="M8 16h5"/></svg>
+                BibTeX</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============================= VIDEO ============================= -->
+      <section class="proj-row">
+        <div class="mark">Overview</div>
+        <div class="proj-body">
+          <figure class="film">
+            <video id="film" src="../assets/img/mfm-cil.mp4" poster="../assets/img/poster.jpg"
+                   autoplay loop muted playsinline preload="metadata"
+                   aria-label="Overview of the method and results"></video>
+            <figcaption>
+              <span>Silent · loops</span>
+              <button id="toggle" type="button">Pause</button>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============================= ABSTRACT ============================= -->
+      <section class="proj-row">
+        <div class="mark">Abstract</div>
+        <div class="proj-body">
+          <h2>Abstract</h2>
+          <p class="lede">Class-Incremental Learning (CIL) aims to learn new classes continuously without
+          forgetting the previously learned ones. Recent works in CIL have significantly advanced across
+          various modalities; however, at the intersection of audio-visual modality, this problem remains
+          underexplored.</p>
+          <p>While representations from multimodal foundational models (MFMs) encapsulate rich static priors,
+          our preliminary analysis shows that these representations struggle in incremental settings.
+          Motivated by this, we propose a framework that generalizes frozen MFMs to audio-visual CIL.
+          Specifically, we leverage their dense audio and visual representations and employ an
+          attention-based contextual guidance module, in which the audio representations serve as
+          task-stable contextual guidance for the visual representations, enabling effective class
+          recognition in the incremental setting. To further mitigate catastrophic forgetting and preserve
+          stability across tasks, we employ feature- and logit-level distillation, which are primarily
+          responsible for the reduced forgetting. Extensive evaluations across various audio-visual CIL
+          benchmarks demonstrate that our approach consistently outperforms state-of-the-art methods.</p>
+        </div>
+      </section>
+
+      <!-- ============================= ARCHITECTURE =============================
+           EDIT ME: point src at your architecture figure, or delete this section. -->
+      <section class="proj-row">
+        <div class="mark">Architecture</div>
+        <div class="proj-body">
+          <h2>The framework</h2>
+          <figure class="figure">
+            <img src="../assets/img/architecture.png" alt="Architecture of the proposed framework: frozen audio and visual encoders feed an attention-based contextual guidance module, supervised by feature- and logit-level distillation.">
+            <figcaption>Frozen audio and visual encoders feed an attention-based contextual guidance module;
+            feature- and logit-level distillation hold the previous task's state in place.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============================= METHOD ============================= -->
+      <section class="proj-row">
+        <div class="mark">What we do</div>
+        <div class="proj-body">
+          <h2>Four findings</h2>
+          <ul class="points">
+            <li><span class="n">01</span><p>Frozen MFMs — <b>SAM-Audio</b>, <b>ImageBind</b> and
+              <b>Qwen2.5-Omni-3B</b> — generalize to audio-visual class-incremental learning, but their
+              strong priors do not by themselves solve incremental recognition. Adaptation has to be
+              targeted, not naive feature reuse.</p></li>
+            <li><span class="n">02</span><p>Cross-modal attention uses <b>audio as task-stable contextual
+              guidance</b> for visual representations. The design holds across all three foundation
+              models, so it is a property of the method rather than of one encoder.</p></li>
+            <li><span class="n">03</span><p><b>Feature- and logit-level distillation</b> balances the
+              current task's representations against the previous task's state, and accounts for most of
+              the reduction in forgetting.</p></li>
+            <li><span class="n">04</span><p>Across three benchmarks, the framework improves over both
+              unimodal and multimodal CIL baselines — with every backbone held fixed between the
+              baseline and our model.</p></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============================= RESULTS ============================= -->
+      <section class="proj-row">
+        <div class="mark">Results</div>
+        <div class="proj-body">
+          <h2>Same backbone, both sides</h2>
+          <div class="tbl-scroll">
+          <table class="tbl">
+            <caption>Mean accuracy on three audio-visual CIL benchmarks. Within every row the baseline
+            and our model use identical frozen encoders, so the margin measures the architecture rather
+            than the feature extractor.</caption>
+            <thead>
+              <tr><th scope="col">Frozen backbone</th><th scope="col">Benchmark</th>
+                  <th scope="col">AV-CIL</th><th scope="col">Ours</th><th scope="col">Δ</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row" rowspan="3">ImageBind</th><td>AVE-CI</td>
+                  <td class="base">85.80</td><td class="ours">91.48</td><td class="gain">+5.68</td></tr>
+              <tr><td>VS100-CI</td><td class="base">77.70</td><td class="ours">84.94</td><td class="gain">+7.24</td></tr>
+              <tr><td>K-S-CI</td><td class="base">77.96</td><td class="ours">86.29</td><td class="gain">+8.33</td></tr>
+
+              <tr><th scope="row" rowspan="3">SAM-Audio</th><td>AVE-CI</td>
+                  <td class="base">84.38</td><td class="ours">88.68</td><td class="gain">+4.30</td></tr>
+              <tr><td>VS100-CI</td><td class="base">74.04</td><td class="ours">79.64</td><td class="gain">+5.60</td></tr>
+              <tr><td>K-S-CI</td><td class="base">80.21</td><td class="ours">84.01</td><td class="gain">+3.80</td></tr>
+
+              <tr><th scope="row" rowspan="3">Qwen2.5-Omni-3B</th><td>AVE-CI</td>
+                  <td class="base">82.98</td><td class="ours">86.14</td><td class="gain">+3.16</td></tr>
+              <tr><td>VS100-CI</td><td class="base">80.43</td><td class="ours">82.40</td><td class="gain">+1.97</td></tr>
+              <tr><td>K-S-CI</td><td class="base">79.32</td><td class="ours">81.85</td><td class="gain">+2.53</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <p class="note">The gain holds in all nine backbone-benchmark pairs. At the legacy
+          AudioMAE + VideoMAE backbone, where no foundation model is involved at all, it is
+          +4.63 / +6.32 / +8.15.</p>
+
+          <div class="forget">
+            <span class="f-l">Average forgetting on AVE-CI, ImageBind</span>
+            <span class="f-n from">3.04</span>
+            <span class="arw">→</span>
+            <span class="f-n to">0.52</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================= SETUP ============================= -->
+      <section class="proj-row">
+        <div class="mark">Setup</div>
+        <div class="proj-body">
+          <h2>Benchmarks and backbones</h2>
+          <ul class="chips">
+            <li><b>AVE-CI</b> &nbsp;28 classes, 4 tasks</li>
+            <li><b>VS100-CI</b></li>
+            <li><b>K-S-CI</b></li>
+            <li><b>SAM-Audio</b> frozen</li>
+            <li><b>ImageBind</b> frozen</li>
+            <li><b>Qwen2.5-Omni-3B</b> frozen</li>
+            <li>No backbone fine-tuning</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============================= BIBTEX ============================= -->
+      <section class="proj-row" id="bibtex">
+        <div class="mark">Cite</div>
+        <div class="proj-body">
+          <h2>BibTeX</h2>
+          <div class="cite">
+            <button class="copy" id="copy" type="button">Copy</button>
+<pre id="bib">@inproceedings{gupta2027generalizing,
+  title     = {Generalizing Multimodal Foundational Models in
+               Context-Driven Class-Incremental Learning},
+  author    = {Gupta, Avi and Sinha, Nilotpal and Raj, Vishnu and
+               Saha, Sambuddha and Joshi, Pratik and
+               Jerripothula, Koteswar Rao and Tillo, Tammam},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on
+               Applications of Computer Vision (WACV)},
+  year      = {2027}
+}</pre>
+          </div>
+        </div>
+      </section>
+
+      <footer class="proj-row proj-foot">
+        <div class="mark" style="border:0;min-height:0"></div>
+        <div class="proj-body">
+          <span>WACV 2027 · Algorithms Track</span>
+          <a href="../publications/index.html">← All publications</a>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+</div>
+
+<script src="../components/sidebar.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+(function () {
+  var v = document.getElementById('film'),
+      t = document.getElementById('toggle');
+  if (v && t) {
+    t.addEventListener('click', function () {
+      if (v.paused) { v.play(); t.textContent = 'Pause'; }
+      else { v.pause(); t.textContent = 'Play'; }
+    });
+    // Some browsers block autoplay even when muted; reflect the real state.
+    v.addEventListener('pause', function () { t.textContent = 'Play'; });
+    v.addEventListener('play',  function () { t.textContent = 'Pause'; });
+  }
+
+  var c = document.getElementById('copy'),
+      b = document.getElementById('bib');
+  if (c && b) {
+    c.addEventListener('click', function () {
+      var txt = b.textContent;
+      var done = function () {
+        c.textContent = 'Copied';
+        c.dataset.done = '1';
+        setTimeout(function () { c.textContent = 'Copy'; c.dataset.done = ''; }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(done, function () {});
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = txt; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

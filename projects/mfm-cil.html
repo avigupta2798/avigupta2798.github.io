@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generalizing Multimodal Foundational Models — Avi Gupta</title>
+<meta name="description" content="WACV 2027. A framework that generalizes frozen multimodal foundational models to audio-visual class-incremental learning, using audio as task-stable contextual guidance for visual features.">
+<link rel="icon" href="../assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+  // Set the theme before first paint so there is no flash.
+  try { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+
+<style>
+/* Styling this page adds on top of the site stylesheet: the venue line, the
+   numbered findings, the results table, the video frame and the BibTeX box.
+   Colours all come from the site's own tokens, so both themes follow it. */
+
+:root{
+  --down: #A33A32;   /* baseline numbers */
+  --up:   #166B4A;   /* our gains        */
+}
+html[data-theme="dark"]{
+  --down: #E89A92;
+  --up:   #6FD1A6;
+}
+
+/* venue line, above the title — takes the same accent as the sidebar links */
+.venue{
+  font-family:var(--font-ui); font-size:13px; font-weight:600;
+  letter-spacing:.09em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:10px;
+}
+.venue span{ color:var(--ink-faint); font-weight:500; letter-spacing:.04em; }
+
+/* numbered findings */
+.points{ margin:0; padding:0; list-style:none; border-top:1px solid var(--rule); }
+.points li{
+  display:grid; grid-template-columns:30px 1fr; gap:16px;
+  padding:16px 0; border-bottom:1px solid var(--rule);
+}
+.points .n{
+  font-family:var(--font-ui); font-size:13px; font-weight:600;
+  color:var(--accent); padding-top:5px; font-variant-numeric:tabular-nums;
+}
+.points p{ margin:0; font-size:17px; line-height:1.58; }
+.points b{ font-weight:600; }
+
+/* results table — scrolls inside its own box on narrow screens rather than
+   pushing the whole page sideways */
+.tbl-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.tbl{ width:100%; border-collapse:collapse; font-family:var(--font-ui); font-size:15px; }
+.tbl caption{
+  text-align:left; font-family:var(--font-body); font-size:16.5px;
+  color:var(--ink-soft); margin-bottom:14px; line-height:1.5;
+}
+.tbl th,.tbl td{ padding:9px 10px; text-align:right; border-bottom:1px solid var(--rule); }
+.tbl th:first-child,.tbl td:first-child{ text-align:left; padding-left:0; }
+.tbl td:last-child,.tbl th:last-child{ padding-right:0; }
+.tbl thead th{
+  font-weight:600; font-size:12.5px; color:var(--ink-faint);
+  border-bottom:1px solid var(--ink); letter-spacing:.02em;
+}
+.tbl tbody th{ font-weight:500; color:var(--ink); }
+.tbl td{ font-variant-numeric:tabular-nums; color:var(--ink-soft); }
+.tbl .base{ color:var(--down); }
+.tbl .ours{ color:var(--ink); font-weight:600; }
+.tbl .gain{ color:var(--up); font-weight:600; }
+.tbl tbody tr:last-child td,.tbl tbody tr:last-child th{ border-bottom:0; }
+.tbl tbody tr:nth-last-child(3) th[rowspan]{ border-bottom:0; }
+.tbl thead th:nth-child(n+3){ white-space:nowrap; }
+
+.forget{
+  display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  margin:26px 0 0; padding:18px 20px;
+  background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius);
+}
+.forget .f-l{ font-size:16px; color:var(--ink-soft); }
+.forget .f-n{ font-family:var(--font-ui); font-variant-numeric:tabular-nums; font-size:26px; font-weight:600; }
+.forget .from{ color:var(--down); }
+.forget .to{ color:var(--up); }
+.forget .arw{ color:var(--ink-faint); font-size:20px; }
+
+@media (max-width:820px){
+  .tbl{ font-size:14px; }
+  .tbl th,.tbl td{ padding:8px; }
+}
+
+.film{ margin:0; border:1px solid var(--rule); background:var(--surface);
+       padding:10px; border-radius:var(--radius); max-width:596px; align-self:center; }
+.film video,
+.film img{ width:100%; aspect-ratio:574/369; height:auto; object-fit:contain;
+           background:var(--ground); border-radius:3px; align-self:center; }
+.film figcaption{ font-family:var(--font-ui); font-size:13px; color:var(--ink-faint);
+                  padding:10px 2px 0; display:flex; justify-content:space-between; gap:16px; }
+.film button{ font:inherit; color:var(--ink-faint); background:none; border:0; padding:0;
+              cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
+.film button:hover{ color:var(--accent); }
+
+.cite{ position:relative; border:1px solid var(--rule); background:var(--surface);
+       border-radius:var(--radius); }
+.cite pre{ margin:0; padding:20px; overflow-x:auto;
+           font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+           font-size:13.5px; line-height:1.7; color:var(--ink-soft); }
+.copy{ position:absolute; top:10px; right:10px; cursor:pointer; font-family:var(--font-ui); }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <div id="site-sidebar"></div>
+
+    <main class="main">
+    <div class="main__inner">
+
+      <div class="venue">WACV 2027 <span>· Algorithms Track</span></div>
+
+      <h1 class="page-title">Generalizing Multimodal Foundational Models in Context-Driven Class-Incremental Learning</h1>
+
+      <div class="pub__authors" style="margin-top:14px">
+        <span class="me">Avi Gupta</span> · Nilotpal Sinha · Vishnu Raj · Sambuddha Saha · Pratik Joshi<br>
+        Koteswar Rao Jerripothula · Tammam Tillo
+      </div>
+
+      <!-- EDIT ME: replace the three href values below -->
+      <div class="pub__links" style="margin-top:16px">
+        <a class="chip" href="#">Paper</a>
+        <a class="chip" href="#">arXiv</a>
+        <a class="chip" href="#">Code</a>
+        <a class="chip" href="#bibtex">BibTeX</a>
+      </div>
+
+      <div class="section">
+        <h2 class="section__title">Overview</h2>
+        <figure class="film">
+          <video id="film" poster="../assets/img/poster.jpg"
+                 autoplay loop muted playsinline preload="auto"
+                 aria-label="Overview of the method and results">
+            <source src="../assets/vid/mfm-cil.mp4" type="video/mp4">
+          </video>
+          <!-- If the video will not play, convert it to a GIF and swap the whole
+               <video> element above for this one line:
+               <img src="../assets/img/mfm-cil.gif" alt="Overview of the method and results">
+               then delete the <figcaption> below, since there is nothing to pause. -->
+          <figcaption>
+           <!--  <button id="toggle" type="button">Pause</button>-->
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="section">
+        <h2 class="section__title">Abstract</h2>
+        <p>Class-Incremental Learning (CIL) aims to learn new classes continuously without forgetting the
+        previously learned ones. Recent works in CIL have significantly advanced across various modalities;
+        however, at the intersection of audio-visual modality, this problem remains underexplored.</p>
+        <p>While representations from multimodal foundational models (MFMs) encapsulate rich static priors,
+        our preliminary analysis shows that these representations struggle in incremental settings.
+        Motivated by this, we propose a framework that generalizes frozen MFMs to audio-visual CIL.
+        Specifically, we leverage their dense audio and visual representations and employ an
+        attention-based contextual guidance module, in which the audio representations serve as
+        task-stable contextual guidance for the visual representations, enabling effective class
+        recognition in the incremental setting. To further mitigate catastrophic forgetting and preserve
+        stability across tasks, we employ feature- and logit-level distillation, which are primarily
+        responsible for the reduced forgetting. Extensive evaluations across various audio-visual CIL
+        benchmarks demonstrate that our approach consistently outperforms state-of-the-art methods.</p>
+      </div>
+
+      <!-- EDIT ME: point src at your architecture figure, or delete this section. -->
+      <div class="section">
+        <h2 class="section__title">The framework</h2>
+        <img src="../assets/img/architecture.png" alt="Frozen audio and visual encoders feed an attention-based contextual guidance module, supervised by feature- and logit-level distillation.">
+        <p class="edu__where" style="margin-top:12px">Frozen audio and visual encoders feed an attention-based
+        contextual guidance module; feature- and logit-level distillation hold the previous task's state in place.</p>
+      </div>
+
+      <div class="section">
+        <h2 class="section__title">Four findings</h2>
+        <ul class="points">
+          <li><span class="n">01</span><p>Frozen MFMs — <b>SAM-Audio</b>, <b>ImageBind</b> and
+            <b>Qwen2.5-Omni-3B</b> — generalize to audio-visual class-incremental learning, but their
+            strong priors do not by themselves solve incremental recognition. Adaptation has to be
+            targeted, not naive feature reuse.</p></li>
+          <li><span class="n">02</span><p>Cross-modal attention uses <b>audio as task-stable contextual
+            guidance</b> for visual representations. The design holds across all three foundation
+            models, so it is a property of the method rather than of one encoder.</p></li>
+          <li><span class="n">03</span><p><b>Feature- and logit-level distillation</b> balances the
+            current task's representations against the previous task's state, and accounts for most of
+            the reduction in forgetting.</p></li>
+          <li><span class="n">04</span><p>Across three benchmarks, the framework improves over both
+            unimodal and multimodal CIL baselines — with every backbone held fixed between the
+            baseline and our model.</p></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2 class="section__title">Same backbone, both sides</h2>
+        <div class="tbl-scroll">
+        <table class="tbl">
+          <caption>Mean accuracy on three audio-visual CIL benchmarks. Within every row the baseline
+          and our model use identical frozen encoders, so the margin measures the architecture rather
+          than the feature extractor.</caption>
+          <thead>
+            <tr><th scope="col">Frozen backbone</th><th scope="col">Benchmark</th>
+                <th scope="col">AV-CIL</th><th scope="col">Ours</th><th scope="col">&#916;</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row" rowspan="3">ImageBind</th><td>AVE-CI</td>
+                <td class="base">85.80</td><td class="ours">91.48</td><td class="gain">+5.68</td></tr>
+            <tr><td>VS100-CI</td><td class="base">77.70</td><td class="ours">84.94</td><td class="gain">+7.24</td></tr>
+            <tr><td>K-S-CI</td><td class="base">77.96</td><td class="ours">86.29</td><td class="gain">+8.33</td></tr>
+
+            <tr><th scope="row" rowspan="3">SAM-Audio</th><td>AVE-CI</td>
+                <td class="base">84.38</td><td class="ours">88.68</td><td class="gain">+4.30</td></tr>
+            <tr><td>VS100-CI</td><td class="base">74.04</td><td class="ours">79.64</td><td class="gain">+5.60</td></tr>
+            <tr><td>K-S-CI</td><td class="base">80.21</td><td class="ours">84.01</td><td class="gain">+3.80</td></tr>
+
+            <tr><th scope="row" rowspan="3">Qwen2.5-Omni-3B</th><td>AVE-CI</td>
+                <td class="base">82.98</td><td class="ours">86.14</td><td class="gain">+3.16</td></tr>
+            <tr><td>VS100-CI</td><td class="base">80.43</td><td class="ours">82.40</td><td class="gain">+1.97</td></tr>
+            <tr><td>K-S-CI</td><td class="base">79.32</td><td class="ours">81.85</td><td class="gain">+2.53</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="edu__where" style="margin-top:14px">The gain holds in all nine backbone-benchmark
+        pairs. At the legacy AudioMAE + VideoMAE backbone, where no foundation model is involved at
+        all, it is +4.63 / +6.32 / +8.15.</p>
+
+        <div class="forget">
+          <span class="f-l">Average forgetting on AVE-CI, ImageBind</span>
+          <span class="f-n from">3.04</span>
+          <span class="arw">&#8594;</span>
+          <span class="f-n to">0.52</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section__title">Benchmarks and backbones</h2>
+        <div class="pub__links">
+          <span class="chip">AVE-CI · 28 classes, 4 tasks</span>
+          <span class="chip">VS100-CI</span>
+          <span class="chip">K-S-CI</span>
+          <span class="chip">SAM-Audio, frozen</span>
+          <span class="chip">ImageBind, frozen</span>
+          <span class="chip">Qwen2.5-Omni-3B, frozen</span>
+          <span class="chip">No backbone fine-tuning</span>
+        </div>
+      </div>
+
+      <div class="section" id="bibtex">
+        <h2 class="section__title">BibTeX</h2>
+        <div class="cite">
+          <button class="chip copy" id="copy" type="button">Copy</button>
+<pre id="bib">@inproceedings{gupta2027generalizing,
+  title     = {Generalizing Multimodal Foundational Models in
+               Context-Driven Class-Incremental Learning},
+  author    = {Gupta, Avi and Sinha, Nilotpal and Raj, Vishnu and
+               Saha, Sambuddha and Joshi, Pratik and
+               Jerripothula, Koteswar Rao and Tillo, Tammam},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on
+               Applications of Computer Vision (WACV)},
+  year      = {2027}
+}</pre>
+        </div>
+      </div>
+
+      <div class="news__more" style="margin-top:40px">
+        <a href="../publications/index.html">← All publications</a>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../components/sidebar.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+(function () {
+  /* ---- video ---- */
+  var v = document.getElementById('film'),
+      t = document.getElementById('toggle'),
+      note = document.getElementById('film-note');
+
+  if (v && t) {
+    t.addEventListener('click', function () {
+      if (v.paused) { v.play(); } else { v.pause(); }
+    });
+    // Browsers may refuse to autoplay; reflect whatever actually happened.
+    v.addEventListener('pause', function () { t.textContent = 'Play'; });
+    v.addEventListener('play',  function () { t.textContent = 'Pause'; });
+
+    // If the file is missing or the codec is unsupported, say so instead of
+    // leaving an empty grey box.
+    v.addEventListener('error', videoFailed);
+    v.querySelector('source').addEventListener('error', videoFailed);
+
+    function videoFailed() {
+      if (note) note.textContent = 'Video could not be loaded — check the file path and format.';
+      t.style.display = 'none';
+    }
+
+    // autoplay can be rejected silently; make the button honest either way
+    var tryPlay = v.play();
+    if (tryPlay && tryPlay.catch) tryPlay.catch(function () { t.textContent = 'Play'; });
+  }
+
+  /* ---- bibtex copy ---- */
+  var c = document.getElementById('copy'),
+      b = document.getElementById('bib');
+  if (c && b) {
+    c.addEventListener('click', function () {
+      var txt = b.textContent;
+      var done = function () {
+        c.textContent = 'Copied';
+        setTimeout(function () { c.textContent = 'Copy'; }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(done, function () {});
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = txt; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
